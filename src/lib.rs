@@ -94,15 +94,55 @@ impl fmt::Debug for AnyHash {
     }
 }
 
+impl fmt::Debug for AnyHash + Send {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        self.debug(f)
+    }
+}
+
+impl fmt::Debug for AnyHash + Send + Sync {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        self.debug(f)
+    }
+}
+
 impl PartialEq for AnyHash {
-    fn eq(&self, other: &AnyHash) -> bool {
+    fn eq(&self, other: &Self) -> bool {
+        AnyHash::eq(self, other)
+    }
+}
+
+impl PartialEq for AnyHash + Send {
+    fn eq(&self, other: &Self) -> bool {
+        AnyHash::eq(self, other)
+    }
+}
+
+impl PartialEq for AnyHash + Send + Sync {
+    fn eq(&self, other: &Self) -> bool {
         AnyHash::eq(self, other)
     }
 }
 
 impl Eq for AnyHash {}
 
+impl Eq for AnyHash + Send {}
+
+impl Eq for AnyHash + Send + Sync {}
+
 impl hash::Hash for AnyHash {
+    fn hash<H: hash::Hasher>(&self, hasher: &mut H) {
+        AnyHash::hash(self, hasher)
+    }
+}
+
+impl hash::Hash for AnyHash + Send {
+    fn hash<H: hash::Hasher>(&self, hasher: &mut H) {
+        AnyHash::hash(self, hasher)
+    }
+}
+
+impl hash::Hash for AnyHash + Send + Sync {
     fn hash<H: hash::Hasher>(&self, hasher: &mut H) {
         AnyHash::hash(self, hasher)
     }
@@ -154,22 +194,74 @@ impl fmt::Debug for AnyOrd {
     }
 }
 
+impl fmt::Debug for AnyOrd + Send {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        self.debug(f)
+    }
+}
+
+impl fmt::Debug for AnyOrd + Send + Sync {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        self.debug(f)
+    }
+}
+
 impl PartialEq for AnyOrd {
-    fn eq(&self, other: &AnyOrd) -> bool {
+    fn eq(&self, other: &Self) -> bool {
+        AnyOrd::eq(self, other)
+    }
+}
+
+impl PartialEq for AnyOrd + Send {
+    fn eq(&self, other: &Self) -> bool {
+        AnyOrd::eq(self, other)
+    }
+}
+
+impl PartialEq for AnyOrd + Send + Sync {
+    fn eq(&self, other: &Self) -> bool {
         AnyOrd::eq(self, other)
     }
 }
 
 impl Eq for AnyOrd {}
 
+impl Eq for AnyOrd + Send {}
+
+impl Eq for AnyOrd + Send + Sync {}
+
 impl PartialOrd for AnyOrd {
-    fn partial_cmp(&self, other: &AnyOrd) -> Option<cmp::Ordering> {
+    fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialOrd for AnyOrd + Send {
+    fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialOrd for AnyOrd + Send + Sync {
+    fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
 impl Ord for AnyOrd {
-    fn cmp(&self, other: &AnyOrd) -> cmp::Ordering {
+    fn cmp(&self, other: &Self) -> cmp::Ordering {
+        AnyOrd::cmp(self, other)
+    }
+}
+
+impl Ord for AnyOrd + Send {
+    fn cmp(&self, other: &Self) -> cmp::Ordering {
+        AnyOrd::cmp(self, other)
+    }
+}
+
+impl Ord for AnyOrd + Send + Sync {
+    fn cmp(&self, other: &Self) -> cmp::Ordering {
         AnyOrd::cmp(self, other)
     }
 }

@@ -1,6 +1,6 @@
 [package]
 name = "any_key"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Phil Ruffwind <rf@rufflewind.com>"]
 description = "Dynamically typed keys for associative arrays."
 documentation = "https://docs.rs/any_key"
